@@ -61,6 +61,22 @@
   box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
 }
 
+.pyodide-loader {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 8px;
+  animation: pulse-glow 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; box-shadow: 0 0 4px rgba(255, 255, 255, 0.02); }
+  50% { opacity: 1; box-shadow: 0 0 10px rgba(255, 255, 255, 0.05); }
+}
+
 .glassCard > div > h3 {
   font-size: 15px;
   font-weight: 400;
@@ -532,4 +548,152 @@
   .movecelldown { right: 68px; }
   .movecellup { right: 98px; }
   .deletecell { right: 128px; }
+}
+
+.module-video {
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+
+  display: block;
+  margin: 25px auto;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.25);
+
+  background: #000;
+
+  overflow: hidden;
+}
+
+.module-video video,
+.module-video iframe,
+.module-video embed {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   Theory Content Template Boxes (write1 to write4)
+   ========================================================================== */
+
+/* General common layout for all content boxes */
+.write1, .write2, .write3, .write4 {
+  font-family: var(--sans);
+  padding: 22px 26px;
+  margin: 24px 0;
+  border-radius: 14px;
+  line-height: 1.8;
+  font-size: 16px;
+  color: var(--text-primary);
+  box-sizing: border-box;
+  transition: transform 240ms cubic-bezier(.2,.9,.3,1),
+              box-shadow 240ms cubic-bezier(.2,.9,.3,1),
+              border-color 240ms ease,
+              background-color 240ms ease;
+  will-change: transform, box-shadow;
+}
+
+/* Style overrides for headers/paragraphs inside the content boxes */
+.write1 h1, .write1 h2, .write1 h3, .write1 h4, .write1 p,
+.write2 h1, .write2 h2, .write2 h3, .write2 h4, .write2 p,
+.write3 h1, .write3 h2, .write3 h3, .write3 h4, .write3 p,
+.write4 h1, .write4 h2, .write4 h3, .write4 h4, .write4 p {
+  font-family: var(--sans);
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.write1 h1, .write2 h1, .write3 h1, .write4 h1 { font-size: 24px; font-weight: 800; }
+.write1 h2, .write2 h2, .write3 h2, .write4 h2 { font-size: 20px; font-weight: 700; }
+.write1 h3, .write2 h3, .write3 h3, .write4 h3 { font-size: 18px; font-weight: 600; }
+.write1 h4, .write2 h4, .write3 h4, .write4 h4 { font-size: 15px; font-weight: 600; }
+
+.write1 h4, .write2 h4, .write3 h4, .write4 h4 {
+  color: var(--accent-hover);
+}
+
+.write1 *:last-child, .write2 *:last-child, .write3 *:last-child, .write4 *:last-child {
+  margin-bottom: 0;
+}
+
+/* Dynamic hover motion & scale */
+.write1:hover, .write2:hover, .write3:hover, .write4:hover {
+  transform: translateY(-6px) scale(1.015);
+}
+
+.write1:active, .write2:active, .write3:active, .write4:active {
+  transform: translateY(-1px) scale(0.995);
+}
+
+/* write1: Important Concept Box (Violet Left Border) */
+.write1 {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(139, 92, 246, 0.02) 100%);
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.write1:hover {
+  border-color: rgba(139, 92, 246, 0.35);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.15);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(139, 92, 246, 0.03) 100%);
+}
+
+/* write2: Deep Premium Dark Highlight Box */
+.write2 {
+  background: linear-gradient(135deg, rgba(20, 26, 42, 0.85) 0%, rgba(10, 15, 30, 0.9) 100%);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.write2:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, rgba(25, 32, 52, 0.9) 0%, rgba(12, 18, 35, 0.95) 100%);
+}
+
+/* write3: Warning / Question Challenge Box (Amber Theme) */
+.write3 {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.06) 0%, rgba(245, 158, 11, 0.02) 100%);
+  border: 1px solid var(--warning-border);
+  border-left: 6px solid var(--warning);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.write3:hover {
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.15);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.03) 100%);
+}
+
+/* write4: Detailed Explanation / Info Box (Emerald/Success Theme) */
+.write4 {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0.01) 100%);
+  border: 1px solid var(--success-border);
+  border-left: 6px solid var(--success);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.write4:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.15);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.07) 0%, rgba(16, 185, 129, 0.02) 100%);
+}
+
+.theory-block {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+
+  color: white;
+
+  line-height: 1.8;
 }
