@@ -8,19 +8,20 @@ export default function Cell({
   onDeleteCell,
   onRunCell,
   onEditCode,
+  isDefault,
 }) {
   return (
     <div className="code-cell">
       <button className="next" onClick={onAddCell}>
         Add New Cell
       </button>
-      <button className="movecellup" onClick={onMoveCellUp}>
+      <button disabled={isDefault} className="movecellup" onClick={onMoveCellUp}>
         Move Up
       </button>
-      <button className="movecelldown" onClick={onMoveCellDown}>
+      <button disabled={isDefault} className="movecelldown" onClick={onMoveCellDown}>
         Move Down
       </button>
-      <button className="deletecell" onClick={onDeleteCell}>
+      <button disabled={isDefault} className="deletecell" onClick={onDeleteCell}>
         Delete Cell
       </button>
       <button className="runcell" onClick={onRunCell}>

@@ -1,0 +1,93 @@
+.container {
+  min-height: 100vh;
+  padding: 40px;
+  text-align: center;
+  background: #0f172a;
+  color: white;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 80px;
+  height: 110px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: white;
+  color: black;
+
+  border-radius: 12px;
+
+  font-size: 24px;
+  font-weight: bold;
+
+  transition: all 0.6s ease;
+}
+
+.mid {
+  background: #facc15;
+  transform: translateY(-20px);
+  box-shadow: 0 0 20px #facc15;
+}
+
+.discarded {
+  opacity: 0.25;
+  transform: scale(0.85);
+}
+
+.found {
+  background: #22c55e;
+  color: white;
+
+  animation: pulse 1s infinite;
+}
+
+.info {
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+.step-btn {
+  margin-top: 30px;
+
+  padding: 12px 24px;
+  border: none;
+
+  background: #3b82f6;
+  color: white;
+
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.step-btn:hover {
+  opacity: 0.9;
+}
+
+.success {
+  color: #22c55e;
+  margin-top: 30px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
