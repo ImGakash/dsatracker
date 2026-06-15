@@ -474,21 +474,20 @@ for i, test in enumerate(tests):
     defaultCell: {
       id: "b23-default",
       code: `
+
 def locate_card(cards, query):
-    lo, hi = 0, len(cards) - 1
+    low, high = 0, len(cards) - 1
     
-    while lo <= hi:
-        mid = (lo + hi) // 2
+    while low <= high:
+        mid = (low+ high) // 2
         mid_number = cards[mid]
-        
-        print("lo:", lo, ", hi:", hi, ", mid:", mid, ", mid_number:", mid_number)
         
         if mid_number == query:
             return mid
         elif mid_number < query:
-            hi = mid - 1  
+            high = mid - 1  
         elif mid_number > query:
-            lo = mid + 1
+            low = mid + 1
     
     return -1
 `,
@@ -549,38 +548,49 @@ print(output)
 
   {
     id: "b26",
-    title: "Binary Search Implementation",
+    title: "New Locate Card Function",
     defaultCell: {
       id: "b26-default",
       code: `
-def test_location(cards, query, mid):
-    mid_number = cards[mid]
-    print("mid:", mid, ", mid_number:", mid_number)
-    if mid_number == query:
-        if mid-1 >= 0 and cards[mid-1] == query:
+def locate_card(cards, query):
+    
+    def condition(mid):
+        if cards[mid] == query:
+            if mid > 0 and cards[mid-1] == query:
+                return 'left'
+            else:
+                return 'found'
+        elif cards[mid] < query:
             return 'left'
         else:
-            return 'found'
-    elif mid_number < query:
-        return 'left'
-    else:
-        return 'right'
-
-def locate_card(cards, query):
-    lo, hi = 0, len(cards) - 1
+            return 'right'
     
-    while lo <= hi:
-        print("lo:", lo, ", hi:", hi)
-        mid = (lo + hi) // 2
-        result = test_location(cards, query, mid)
-        
-        if result == 'found':
-            return mid
-        elif result == 'left':
-            hi = mid - 1
-        elif result == 'right':
-            lo = mid + 1
-    return -1
+    return binary_search(0, len(cards) - 1, condition)
+`,
+      output: "",
+      isError: false
+    },
+    userCells: []
+  },
+  {
+    id: "b27",
+    title: "Run All Tests with Output",
+    defaultCell: {
+      id: "b24-default",
+      code: `
+for i, test in enumerate(tests):
+    print(f"-----case {i}----")
+    cards = test['input']['cards']
+    query = test['input']['query']
+    output = test['output']
+
+    result = locate_card(cards, query)
+
+    print("cards:", cards)
+    print("query:", query)
+    print("result:", result)
+    print("successfully tested?", result == output)
+    print()
 `,
       output: "",
       isError: false
@@ -589,24 +599,29 @@ def locate_card(cards, query):
   },
 
   {
-    id: "b27",
-    title: "Test Binary Search",
+    id: "b28",
+    title: "binary",
     defaultCell: {
-      id: "b27-default",
+      id: "b24-default",
       code: `
-# Test the binary search implementation
-for i, test in enumerate(tests):
-    cards = test['input']['cards']
-    query = test['input']['query']
-    expected = test['output']
-    result = binary_search(cards, query)
-    print(f"Test {i}: {result == expected}")
+def binary_search(lo, hi, condition):
+    """TODO - add docs"""
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        result = condition(mid)
+        if result == 'found':
+            return mid
+        elif result == 'left':
+            hi = mid - 1
+        else:
+            lo = mid + 1
+    return -1
 `,
       output: "",
       isError: false
     },
     userCells: []
-  },
+  }
 
   
 ];
