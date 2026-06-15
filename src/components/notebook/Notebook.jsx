@@ -12,11 +12,13 @@ export default function Notebook({
   if (!section) return null;
 
   return (
+    
     <div className="notebook-section">
 
       {/* ===================== */}
       {/* DEFAULT CELL (FIXED) */}
       {/* ===================== */}
+      
       <Cell
         cell={section.defaultCell}
         isDefault={true}
@@ -66,14 +68,6 @@ export default function Notebook({
           }
         />
       ))}
-
-      {/* Add new cell at end */}
-      <button
-        className="next"
-        onClick={() => onAddCell(section.id, null)}
-      >
-        Add New Cell
-      </button>
 
     </div>
   );

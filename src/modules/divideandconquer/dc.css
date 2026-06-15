@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Binary Search Module Styles
+   Divide & Conquer Module Styles (Cloned Template)
    Scope-safe premium visual layout using project design variables
    ========================================================================== */
 
@@ -659,11 +659,9 @@
 }
 
 .write1:hover {
-  /* Hover effects intentionally disabled for .write1 */
-  transform: none !important;
-  box-shadow: none !important;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(139, 92, 246, 0.02) 100%) !important;
-  border-color: var(--border) !important;
+  border-color: rgba(139, 92, 246, 0.35);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.15);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(139, 92, 246, 0.03) 100%);
 }
 
 /* write2: Deep Premium Dark Highlight Box */
@@ -712,8 +710,6 @@
   padding: 20px;
   border-radius: 12px;
   margin: 20px 0;
-
   color: white;
-
   line-height: 1.8;
 }

@@ -4,6 +4,7 @@ import Question from "./Question.jsx";
 import Signup from "./signup.jsx";
 import Login from "./login.jsx";
 import BinarySearch from "./modules/binarySearch/binarySearch.jsx";
+import DivideAndConquer from "./modules/divideandconquer/dc.jsx";
 
 export default function App() {
   const [questions, setQuestions] = useState([]);
@@ -14,6 +15,7 @@ export default function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [authTab, setAuthTab] = useState("login");
   const [showBinarySearch, setShowBinarySearch] = useState(false);
+  const [showDivideAndConquer, setShowDivideAndConquer] = useState(false);
   const [toasts, setToasts] = useState([]);
 
   // ---------------- TOAST SYSTEM ----------------
@@ -83,6 +85,7 @@ export default function App() {
     setToken(null);
     setQuestions([]);
     setShowBinarySearch(false);
+    setShowDivideAndConquer(false);
     showToast("Logged out successfully.", "info");
   };
 
@@ -356,6 +359,31 @@ export default function App() {
     );
   }
 
+  // ---------------- RENDER DIVIDE AND CONQUER PAGE ----------------
+  if (showDivideAndConquer) {
+    return (
+      <div className="dashboardPage">
+        <div className="bg-glow-container">
+          <div className="bg-glow-1"></div>
+          <div className="bg-glow-2"></div>
+        </div>
+
+        <header className="dashboardHeader">
+          <div className="logo" onClick={() => setShowDivideAndConquer(false)} style={{ cursor: "pointer" }}>
+            <span>🚀</span> DSA Tracker
+          </div>
+          <button onClick={() => setShowDivideAndConquer(false)} className="btnNav">
+            ← Back to Dashboard
+          </button>
+        </header>
+
+        <div className="glassCard" style={{ padding: "40px", textAlign: "left" }}>
+          <DivideAndConquer />
+        </div>
+      </div>
+    );
+  }
+
   // ---------------- RENDER DASHBOARD ----------------
   return (
     <div className="dashboardPage">
@@ -371,10 +399,22 @@ export default function App() {
         
         <div className="navButtonGroup">
           <button
-            onClick={() => setShowBinarySearch(true)}
+            onClick={() => {
+              setShowBinarySearch(true);
+              setShowDivideAndConquer(false);
+            }}
             className="btnNav"
           >
             📚 Binary Search
+          </button>
+          <button
+            onClick={() => {
+              setShowDivideAndConquer(true);
+              setShowBinarySearch(false);
+            }}
+            className="btnNav"
+          >
+            🧩 Divide & Conquer
           </button>
           <button onClick={handleLogout} className="btnLogout">
             Logout
@@ -455,9 +495,22 @@ export default function App() {
             <div className="quickNavList">
               <button
                 className="quickNavBtn"
-                onClick={() => setShowBinarySearch(true)}
+                onClick={() => {
+                  setShowBinarySearch(true);
+                  setShowDivideAndConquer(false);
+                }}
               >
                 <span>📚 Binary Search</span>
+                <span className="badgeCount">Topic</span>
+              </button>
+              <button
+                className="quickNavBtn"
+                onClick={() => {
+                  setShowDivideAndConquer(true);
+                  setShowBinarySearch(false);
+                }}
+              >
+                <span>🧩 Divide & Conquer</span>
                 <span className="badgeCount">Topic</span>
               </button>
             </div>
