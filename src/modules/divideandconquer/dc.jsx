@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import introVideo from "../../assets/videos/binaryintro.mp4";
 import "./dc.css";
-import Visual from "./LinearSearchDemo.jsx";
 import {
   initPyodide,
   getPyodide,
@@ -12,7 +10,6 @@ import { sections as DEFAULT_CELLS } from "./dc.model.js";
 
 import Notebook from "../../components/notebook/Notebook.jsx";
 import useNotebook from "../../components/notebook/useNotebook.js";
-import Visual1 from "./dcvisual.jsx";
 import Visual2 from "./bsvis.jsx";
 import Visual3 from "./InsertionSort.jsx";
 import Visual4 from "./mergesort.jsx";

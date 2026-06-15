@@ -207,7 +207,7 @@ tests
 
   {
     id: "b11",
-    title: "Linear Search Implementation",
+    title: "Bubble Sort Implementation",
     defaultCell: {
       id: "b11-default",
       code: `
@@ -237,7 +237,7 @@ def bubble_sort(nums):
 
   {
     id: "b12",
-    title: "Display Single Test",
+    title: "Test Bubble Sort",
     defaultCell: {
       id: "b12-default",
       code: `
@@ -250,7 +250,7 @@ for i, test in enumerate(tests):
 
     print("nums:", nums)
     print("result:",result)
-    print("successfully tested?", result == result)
+    print("successfully tested?", result == expected)
 `,
       output: "",
       isError: false
@@ -260,7 +260,7 @@ for i, test in enumerate(tests):
 
   {
     id: "b13",
-    title: "Run Single Test",
+    title: "Insertion Sort Implementation",
     defaultCell: {
       id: "b13-default",
       code: `
@@ -288,7 +288,7 @@ def insertion_sort(nums):
 
   {
     id: "b14",
-    title: "Verify Result",
+    title: "Merge Sort Implementation",
     defaultCell: {
       id: "b14-default",
       code: `
@@ -341,7 +341,7 @@ def merge_sort(nums):
 
   {
     id: "b15",
-    title: "Run All Tests",
+    title: "Test Merge Sort",
     defaultCell: {
       id: "b15-default",
       code: `
@@ -353,7 +353,7 @@ for i, test in enumerate(tests):
 
     print("nums:", nums)
     print("result:",result)
-    print("successfully tested?", result == result) 
+    print("successfully tested?", result == expected) 
 `,
       output: "",
       isError: false
@@ -363,7 +363,7 @@ for i, test in enumerate(tests):
 
   {
     id: "b16",
-    title: "Linear Search Refactored",
+    title: "Quick Sort Implementation",
     defaultCell: {
       id: "b16-default",
       code: `
@@ -405,228 +405,22 @@ def quick_sort(arr, low, high):
 
   {
     id: "b17",
-    title: "Linear Search with Debugging",
+    title: "Test Quick Sort",
     defaultCell: {
       id: "b17-default",
       code: `
 for i, test in enumerate(tests):
     print(f"-----case {i}----")
-    nums = test["input"]["nums"]
+    nums = list(test["input"]["nums"])
     expected = test["output"]
-    result = quick_sort(nums, 0, len(nums) - 1)
+    quick_sort(nums, 0, len(nums) - 1)
 
     print("nums:", nums)
-    print("result:",result)
-    print("successfully tested?", result == result) 
+    print("successfully tested?", nums == expected) 
 `,
       output: "",
       isError: false
     },
     userCells: []
-  },
-
-  {
-    id: "b20",
-    title: "Test Edge Case: Empty Array",
-    defaultCell: {
-      id: "b20-default",
-      code: `
-cards=[]
-query=40
-locate_card(cards, query)
-`,
-      output: "",
-      isError: false
-    },
-    userCells: []
-  },
-
-  {
-    id: "b21",
-    title: "Optimized Linear Search",
-    defaultCell: {
-      id: "b21-default",
-      code: `
-def locate_card(cards, query):
-    position = 0
-    while position < len(cards):
-        if cards[position] == query:
-            return position
-        position += 1
-    return -1
-`,
-      output: "",
-      isError: false
-    },
-    userCells: []
-  },
-
-  {
-    id: "b22",
-    title: "Test All Cases with Output",
-    defaultCell: {
-      id: "b22-default",
-      code: `
-for i, test in enumerate(tests):
-    print(f"-----case {i}----")
-    cards = test['input']['cards']
-    query = test['input']['query']
-    output = test['output']
-
-    result = locate_card(cards, query)
-
-    print("cards:", cards)
-    print("query:", query)
-    print("result:", result)
-    print("successfully tested?", result == output)
-    print()
-
-`,
-      output: "",
-      isError: false
-    },
-    userCells: []
-  },
-
-  {
-    id: "b23",
-    title: "Binary Search Implementation with Debugging",
-    defaultCell: {
-      id: "b23-default",
-      code: `
-def locate_card(cards, query):
-    lo, hi = 0, len(cards) - 1
-    
-    while lo <= hi:
-        mid = (lo + hi) // 2
-        mid_number = cards[mid]
-        
-        print("lo:", lo, ", hi:", hi, ", mid:", mid, ", mid_number:", mid_number)
-        
-        if mid_number == query:
-            return mid
-        elif mid_number < query:
-            hi = mid - 1  
-        elif mid_number > query:
-            lo = mid + 1
-    
-    return -1
-`,
-      output: "",
-      isError: false
-    },
-    userCells: []
-  },
-
-  {
-    id: "b24",
-    title: "Run All Tests with Output",
-    defaultCell: {
-      id: "b24-default",
-      code: `
-for i, test in enumerate(tests):
-    print(f"-----case {i}----")
-    cards = test['input']['cards']
-    query = test['input']['query']
-    output = test['output']
-
-    result = locate_card(cards, query)
-
-    print("cards:", cards)
-    print("query:", query)
-    print("result:", result)
-    print("successfully tested?", result == output)
-    print()
-`,
-      output: "",
-      isError: false
-    },
-    userCells: []
-  },
-
-  {
-    id: "b25",
-    title: "Test Specific Case",
-    defaultCell: {
-      id: "b25-default",
-      code: `
-i = 8
-print(f"-----case {i}----")
-
-test = tests[i]
-cards = test['input']['cards']
-query = test['input']['query']
-output = test['output']
-print(cards)
-print(query)
-print(output)
-`,
-      output: "",
-      isError: false
-    },
-    userCells: []
-  },
-
-  {
-    id: "b26",
-    title: "Binary Search Implementation",
-    defaultCell: {
-      id: "b26-default",
-      code: `
-def test_location(cards, query, mid):
-    mid_number = cards[mid]
-    print("mid:", mid, ", mid_number:", mid_number)
-    if mid_number == query:
-        if mid-1 >= 0 and cards[mid-1] == query:
-            return 'left'
-        else:
-            return 'found'
-    elif mid_number < query:
-        return 'left'
-    else:
-        return 'right'
-
-def locate_card(cards, query):
-    lo, hi = 0, len(cards) - 1
-    
-    while lo <= hi:
-        print("lo:", lo, ", hi:", hi)
-        mid = (lo + hi) // 2
-        result = test_location(cards, query, mid)
-        
-        if result == 'found':
-            return mid
-        elif result == 'left':
-            hi = mid - 1
-        elif result == 'right':
-            lo = mid + 1
-    return -1
-`,
-      output: "",
-      isError: false
-    },
-    userCells: []
-  },
-
-  {
-    id: "b27",
-    title: "Test Binary Search",
-    defaultCell: {
-      id: "b27-default",
-      code: `
-# Test the binary search implementation
-for i, test in enumerate(tests):
-    cards = test['input']['cards']
-    query = test['input']['query']
-    expected = test['output']
-    result = binary_search(cards, query)
-    print(f"Test {i}: {result == expected}")
-`,
-      output: "",
-      isError: false
-    },
-    userCells: []
-  },
-
-  
+  }
 ];
