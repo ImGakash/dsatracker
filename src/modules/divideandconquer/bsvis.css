@@ -1,0 +1,75 @@
+.bubble-container {
+  min-height: 100vh;
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  padding: 40px;
+}
+
+.array-container {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.bubble-card {
+  width: 80px;
+  height: 80px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background: #3b82f6;
+  color: white;
+
+  font-size: 28px;
+  font-weight: bold;
+
+  transition: all 0.5s ease;
+}
+
+.compare {
+  background: #facc15;
+  color: black;
+
+  transform: translateY(-15px);
+}
+
+.swap {
+  background: #ef4444;
+
+  transform: scale(1.1);
+}
+
+.sorted {
+  background: #22c55e;
+}
+
+.next-btn {
+  margin-top: 40px;
+
+  padding: 12px 24px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #2563eb;
+  color: white;
+
+  cursor: pointer;
+}
+
+.success {
+  margin-top: 30px;
+  color: #22c55e;
+}
+
+.info {
+  margin-top: 20px;
+  font-size: 18px;
+}
