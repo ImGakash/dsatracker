@@ -1,0 +1,715 @@
+/* ==========================================================================
+   Divide & Conquer Module Styles (Cloned Template)
+   Scope-safe premium visual layout using project design variables
+   ========================================================================== */
+
+/* Scoped Title and Description */
+.module-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.module-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, var(--accent) 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  filter: drop-shadow(0 2px 8px rgba(139, 92, 246, 0.15));
+  margin: 0;
+}
+
+.btn-reset {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.2) 100%);
+  border: 1px solid var(--warning-border);
+  color: var(--warning);
+  padding: 10px 18px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-reset::before {
+  content: "\21BB"; /* circular arrow refresh symbol */
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.btn-reset:hover {
+  background: linear-gradient(135deg, var(--warning) 0%, #d97706 100%);
+  border-color: var(--warning);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35);
+}
+
+.btn-reset:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+}
+
+.pyodide-loader {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 8px;
+  animation: pulse-glow 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; box-shadow: 0 0 4px rgba(255, 255, 255, 0.02); }
+  50% { opacity: 1; box-shadow: 0 0 10px rgba(255, 255, 255, 0.05); }
+}
+
+.glassCard > div > h3 {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 800px;
+}
+
+.method {
+  color: var(--text-primary);
+  font-family: var(--sans);
+  max-width: 100%;
+  margin: 24px 0;
+  box-sizing: border-box;
+}
+
+.method h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--accent-hover);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.method h5 {
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--text-muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* List elements inside Method explanation blocks */
+.method ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.method ol li {
+  position: relative;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 14px 18px 14px 24px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  line-height: 1.6;
+  font-size: 14px;
+  color: var(--text-secondary);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.method ol li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--accent), #c084fc);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  opacity: 0.5;
+  transition: opacity 0.25s;
+}
+
+.method ol li:hover {
+  background: var(--surface-hover);
+  transform: translateX(6px);
+  border-color: rgba(139, 92, 246, 0.3);
+  color: var(--text-primary);
+}
+
+.method ol li:hover::before {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Jupyter Notebook style Code Cell
+   ========================================================================== */
+.code-cell {
+  position: relative;
+  margin-top: 24px;
+  margin-bottom: 24px;
+  background: rgba(10, 15, 30, 0.45);
+  padding: 64px 20px 20px 20px; /* Large top padding to house the window title bar & buttons */
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  min-height: 250px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 8px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
+.code-cell:hover {
+  border-color: rgba(139, 92, 246, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 12px 40px rgba(139, 92, 246, 0.08);
+}
+
+/* MacOS-style Window Header Bar Mockup */
+.code-cell::before {
+  content: "Python 3 - Interactive Cell";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48px;
+  background: rgba(15, 23, 42, 0.85);
+  border-bottom: 1px solid var(--border);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  display: flex;
+  align-items: center;
+  padding-left: 72px; /* Leaves space for window dots */
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Red, Yellow, Green macOS Window Dots */
+.code-cell::after {
+  content: "";
+  position: absolute;
+  top: 19px;
+  left: 18px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff5f56; /* Close */
+  box-shadow: 16px 0 0 #ffbd2e, 32px 0 0 #27c93f; /* Minimize, Maximize */
+  z-index: 11;
+}
+
+/* Code Editor Textarea */
+.code-cell textarea {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  background: rgba(8, 11, 20, 0.75);
+  color: #e2e8f0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.code-cell textarea:focus {
+  border-color: var(--accent);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 0 3px var(--accent-glow);
+  background: rgba(8, 11, 20, 0.95);
+}
+
+/* Custom Scrollbars for Textarea Editor and Output Box */
+.code-cell textarea::-webkit-scrollbar,
+.output-content::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.code-cell textarea::-webkit-scrollbar-track,
+.output-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.code-cell textarea::-webkit-scrollbar-thumb,
+.output-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.code-cell textarea::-webkit-scrollbar-thumb:hover,
+.output-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================================
+   Terminal Mockup Output Box
+   ========================================================================== */
+.output-box {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 200px;
+  transition: all 0.25s ease;
+}
+
+.output-box h4 {
+  margin: 0 0 8px 0;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.output-content {
+  flex-grow: 1;
+  height: calc(100% - 22px);
+  min-height: 140px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  background: rgba(5, 7, 12, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  padding: 12px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--success); /* Terminal Green */
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+/* Error styling for failed cell execution */
+.output-box.error {
+  border-color: rgba(244, 63, 94, 0.4);
+  background: rgba(244, 63, 94, 0.03);
+}
+
+.output-box.error h4 {
+  color: var(--danger);
+}
+
+.output-box.error .output-content {
+  color: var(--danger); /* Rose red error text */
+  border-color: rgba(244, 63, 94, 0.15);
+  box-shadow: inset 0 2px 8px rgba(244, 63, 94, 0.1);
+}
+
+/* ==========================================================================
+   Header Action Toolbar Buttons (Absolute placement top-right)
+   ========================================================================== */
+.next,
+.movecellup,
+.movecelldown,
+.deletecell,
+.runcell {
+  position: absolute;
+  top: 9px;
+  z-index: 12;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0; /* Hides the native text content of the button */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.next:hover,
+.movecellup:hover,
+.movecelldown:hover,
+.deletecell:hover,
+.runcell:hover {
+  transform: translateY(-1px) scale(1.05);
+}
+
+.next:active,
+.movecellup:active,
+.movecelldown:active,
+.deletecell:active,
+.runcell:active {
+  transform: translateY(0) scale(0.95);
+}
+
+/* Button Individual Colors & Icon Assignments */
+
+/* Run Cell Button (Rightmost) */
+.runcell {
+  right: 12px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.25) 100%);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: var(--success);
+}
+
+.runcell:hover {
+  background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+  border-color: var(--success);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.runcell::before {
+  content: "\25B6"; /* Play icon */
+  font-size: 12px;
+}
+
+/* Add Cell Button */
+.next {
+  right: 48px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.25) 100%);
+  border-color: rgba(139, 92, 246, 0.4);
+  color: var(--accent-hover);
+}
+
+.next:hover {
+  background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+}
+
+.next::before {
+  content: "\002B"; /* Plus icon */
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Move Down Button */
+.movecelldown {
+  right: 84px;
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+.movecelldown:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.movecelldown::before {
+  content: "\25BC"; /* Caret down icon */
+  font-size: 10px;
+}
+
+/* Move Up Button */
+.movecellup {
+  right: 120px;
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+.movecellup:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.movecellup::before {
+  content: "\25B2"; /* Caret up icon */
+  font-size: 10px;
+}
+
+/* Delete Cell Button */
+.deletecell {
+  right: 156px;
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.1) 0%, rgba(244, 63, 94, 0.25) 100%);
+  border-color: rgba(244, 63, 94, 0.4);
+  color: var(--danger);
+}
+
+.deletecell:hover {
+  background: linear-gradient(135deg, var(--danger) 0%, #e11d48 100%);
+  border-color: var(--danger);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(244, 63, 94, 0.4);
+}
+
+.deletecell::before {
+  content: "\2715"; /* Cross/cancel icon */
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Notebook bottom Add Cell Button */
+.btn-add-cell-end {
+  display: block;
+  width: fit-content;
+  margin: 24px auto 8px auto;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(139, 92, 246, 0.15) 100%);
+  border: 1px dashed var(--accent-border);
+  color: var(--accent-hover);
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-add-cell-end:hover {
+  background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
+  border-style: solid;
+  border-color: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
+}
+
+.btn-add-cell-end:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
+}
+
+/* ==========================================================================
+   Responsive Configurations
+   ========================================================================== */
+@media (max-width: 900px) {
+  .code-cell {
+    grid-template-columns: 1fr; /* Stack editor and output vertically on small screens */
+    gap: 16px;
+    padding-top: 60px;
+  }
+  
+  .output-box {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .method {
+    padding: 20px;
+  }
+
+  .method h3 {
+    font-size: 16px;
+  }
+
+  .method ol li {
+    font-size: 13px;
+    padding: 12px 14px 12px 20px;
+  }
+
+  /* Reduce scale of header panel and controls for tiny screens */
+  .code-cell::before {
+    padding-left: 64px;
+    font-size: 10px;
+  }
+  
+  .code-cell::after {
+    left: 14px;
+    top: 19px;
+    width: 8px;
+    height: 8px;
+    box-shadow: 12px 0 0 #ffbd2e, 24px 0 0 #27c93f;
+  }
+
+  .next,
+  .movecellup,
+  .movecelldown,
+  .deletecell,
+  .runcell {
+    width: 26px;
+    height: 26px;
+    top: 11px;
+  }
+  
+  .runcell { right: 8px; }
+  .next { right: 38px; }
+  .movecelldown { right: 68px; }
+  .movecellup { right: 98px; }
+  .deletecell { right: 128px; }
+}
+
+.module-video {
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+
+  display: block;
+  margin: 25px auto;
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.25);
+
+  background: #000;
+
+  overflow: hidden;
+}
+
+.module-video video,
+.module-video iframe,
+.module-video embed {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   Theory Content Template Boxes (write1 to write4)
+   ========================================================================== */
+
+/* General common layout for all content boxes */
+.write1, .write2, .write3, .write4 {
+  font-family: var(--sans);
+  padding: 22px 26px;
+  margin: 24px 0;
+  border-radius: 14px;
+  line-height: 1.8;
+  font-size: 16px;
+  color: var(--text-primary);
+  box-sizing: border-box;
+  transition: transform 240ms cubic-bezier(.2,.9,.3,1),
+              box-shadow 240ms cubic-bezier(.2,.9,.3,1),
+              border-color 240ms ease,
+              background-color 240ms ease;
+  will-change: transform, box-shadow;
+}
+
+/* Style overrides for headers/paragraphs inside the content boxes */
+.write1 h1, .write1 h2, .write1 h3, .write1 h4, .write1 p,
+.write2 h1, .write2 h2, .write2 h3, .write2 h4, .write2 p,
+.write3 h1, .write3 h2, .write3 h3, .write3 h4, .write3 p,
+.write4 h1, .write4 h2, .write4 h3, .write4 h4, .write4 p {
+  font-family: var(--sans);
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.write1 h1, .write2 h1, .write3 h1, .write4 h1 { font-size: 24px; font-weight: 800; }
+.write1 h2, .write2 h2, .write3 h2, .write4 h2 { font-size: 20px; font-weight: 700; }
+.write1 h3, .write2 h3, .write3 h3, .write4 h3 { font-size: 18px; font-weight: 600; }
+.write1 h4, .write2 h4, .write3 h4, .write4 h4 { font-size: 15px; font-weight: 600; }
+
+.write1 h4, .write2 h4, .write3 h4, .write4 h4 {
+  color: var(--accent-hover);
+}
+
+.write1 *:last-child, .write2 *:last-child, .write3 *:last-child, .write4 *:last-child {
+  margin-bottom: 0;
+}
+
+/* Dynamic hover motion & scale */
+.write1:hover, .write2:hover, .write3:hover, .write4:hover {
+  transform: translateY(-6px) scale(1.015);
+}
+
+.write1:active, .write2:active, .write3:active, .write4:active {
+  transform: translateY(-1px) scale(0.995);
+}
+
+/* write1: Important Concept Box (Violet Left Border) */
+.write1 {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.06) 0%, rgba(139, 92, 246, 0.02) 100%);
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.write1:hover {
+  border-color: rgba(139, 92, 246, 0.35);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.15);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(139, 92, 246, 0.03) 100%);
+}
+
+/* write2: Deep Premium Dark Highlight Box */
+.write2 {
+  background: linear-gradient(135deg, rgba(20, 26, 42, 0.85) 0%, rgba(10, 15, 30, 0.9) 100%);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.write2:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, rgba(25, 32, 52, 0.9) 0%, rgba(12, 18, 35, 0.95) 100%);
+}
+
+/* write3: Warning / Question Challenge Box (Amber Theme) */
+.write3 {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.06) 0%, rgba(245, 158, 11, 0.02) 100%);
+  border: 1px solid var(--warning-border);
+  border-left: 6px solid var(--warning);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.write3:hover {
+  border-color: rgba(245, 158, 11, 0.45);
+  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.15);
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.03) 100%);
+}
+
+/* write4: Detailed Explanation / Info Box (Emerald/Success Theme) */
+.write4 {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0.01) 100%);
+  border: 1px solid var(--success-border);
+  border-left: 6px solid var(--success);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.write4:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 12px 30px rgba(16, 185, 129, 0.15);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.07) 0%, rgba(16, 185, 129, 0.02) 100%);
+}
+
+.theory-block {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+  color: white;
+  line-height: 1.8;
+}

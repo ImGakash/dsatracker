@@ -1,10 +1,15 @@
 import { useState } from "react";
+import { GoogleLogin } from "@react-oauth/google";
+
+import.meta.env.VITE_GOOGLE_CLIENT_ID
 
 export default function Login({ onLoginSuccess, onSwitchToSignup }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -47,6 +52,44 @@ export default function Login({ onLoginSuccess, onSwitchToSignup }) {
       setPassword("");
     } catch (err) {
       console.error("Login error:", err);
+      setError("Network error. Please make sure the backend is running.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleAuth = async (response) => {
+    const googleToken = response.credential;
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("http://localhost:3000/auth/google", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token: googleToken }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Google login failed");
+        return;
+      }
+
+      // Save JWT token
+      localStorage.setItem("token", data.token);
+
+      // Notify parent component
+      if (onLoginSuccess) {
+        onLoginSuccess(data.token);
+      }
+
+    } catch (err) {
+      console.error("Google Auth error:", err);
       setError("Network error. Please make sure the backend is running.");
     } finally {
       setLoading(false);
@@ -121,6 +164,11 @@ export default function Login({ onLoginSuccess, onSwitchToSignup }) {
           {loading ? "Logging in..." : "Login"}
         </button>
       </form>
+      <p style={{ textAlign: "center" }}>OR</p>
+      <GoogleLogin
+        onSuccess={handleGoogleAuth}
+        onError={() => console.log("Google Login Failed")}
+      />
 
       <p className="authSwitchText">
         Don't have an account?{" "}
