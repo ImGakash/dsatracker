@@ -3,24 +3,15 @@ const router = express.Router();
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { OAuth2Client } = require("google-auth-library");
 
 const User = require("../models/User");
 
+
 const JWT_SECRET = process.env.JWT_SECRET;
-
-//signup
-  //→ check email
-  //→ hash password
-  //→ save user
-
-//login
-  //→ find user
-  //→ compare password
-  //→ generate JWT
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 
-
-// Signup route
 
 router.post("/signup", async (req, res) => {
   try {
@@ -65,6 +56,12 @@ router.post("/login", async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
+    if (!user.password) {
+      return res.status(400).json({
+        message: "This account uses Google login. Please sign in with Google."
+      });
+    }
+
 
     // 2. compare password
     const isMatch = await bcrypt.compare(password, user.password);
@@ -83,6 +80,53 @@ router.post("/login", async (req, res) => {
     res.json({
       message: "Login successful",
       token,
+      userId: user._id
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Server error" });
+  }
+}
+
+);
+
+router.post("/google", async (req, res) => {
+  try {
+    const { token } = req.body;
+
+    // verify token
+    const verification = await googleClient.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID
+    });
+
+    const payload = verification.getPayload();
+
+    let user = await User.findOne({ email: payload.email });
+
+    if (!user) {
+      user = await User.create({
+        name: payload.name,
+        email: payload.email,
+        googleId: payload.sub,
+        avatar: payload.picture
+      });
+    } else {
+      if (!user.googleId) user.googleId = payload.sub;
+      if (!user.avatar) user.avatar = payload.picture;
+      await user.save();
+    }
+
+    const jwtToken = jwt.sign(
+      { userId: user._id },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    return res.json({
+      message: "Login successful",
+      token: jwtToken,
       userId: user._id
     });
 
