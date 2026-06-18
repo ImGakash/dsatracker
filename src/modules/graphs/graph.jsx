@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import introVideo from "../../assets/videos/graph-intro.mp4";
-import Zepto from "../../assets/videos/zepto.mp4";
+import Zepto from "../../assets/videos/ZEPTO.mp4";
 import weight from "../../assets/videos/weightgraph.mp4";
 import bfs from "../../assets/videos/bfs.mp4";
 import bfsi from "../../assets/videos/bfs.png";

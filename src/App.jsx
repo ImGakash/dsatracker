@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect, useCallback } from "react";
-import Question from "./Question.jsx";
+import Question from "./question.jsx";
 import Signup from "./signup.jsx";
 import Login from "./login.jsx";
 import BinarySearch from "./modules/binarySearch/binarySearch.jsx";
