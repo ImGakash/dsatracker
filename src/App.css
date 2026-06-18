@@ -220,7 +220,7 @@
   border-radius: 12px;
   cursor: pointer;
   font-family: var(--sans);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -230,22 +230,30 @@
 
 .btn-primary {
   background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.25);
 }
 
 .btn-primary:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.45);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
 }
 
 .btn-success {
   background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
 }
 
 .btn-success:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.45);
+}
+
+.btn-success:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
 }
 
 /* Dashboard Page Structure */
@@ -293,32 +301,34 @@
 }
 
 .btnNav {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
   color: var(--text-secondary);
   padding: 10px 18px;
   font-size: 14px;
   font-weight: 600;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   font-family: var(--sans);
 }
 
 .btnNav:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(139, 92, 246, 0.08);
   color: var(--text-primary);
-  border-color: var(--border-hover);
+  border-color: var(--accent-border);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.15);
+  transform: translateY(-1px);
 }
 
 .btnNav.active {
   background: var(--accent-bg);
   border-color: var(--accent-border);
   color: var(--accent-hover);
-  box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.25);
 }
 
 .btnLogout {
@@ -373,18 +383,19 @@
 /* Cards (Base styles) */
 .glassCard {
   background: var(--surface);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 28px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glassCard:hover {
-  border-color: var(--border-hover);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  border-color: var(--accent-border);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 15px rgba(139, 92, 246, 0.1);
+  transform: translateY(-2px);
 }
 
 /* Progress Stats Circle widget */
@@ -591,7 +602,7 @@
   border-radius: 12px;
   font-size: 15px;
   font-family: var(--sans);
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .questionInput input {
@@ -607,7 +618,7 @@
 .questionInput select:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
+  box-shadow: 0 0 0 3px var(--accent-glow), 0 0 12px rgba(139, 92, 246, 0.1);
   background: rgba(0, 0, 0, 0.35);
 }
 

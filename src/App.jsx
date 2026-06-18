@@ -1,10 +1,17 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Question from "./Question.jsx";
 import Signup from "./signup.jsx";
 import Login from "./login.jsx";
 import BinarySearch from "./modules/binarySearch/binarySearch.jsx";
 import DivideAndConquer from "./modules/divideandconquer/dc.jsx";
+import Graphs from "./modules/graphs/graph.jsx";
+
+let lastToastId = 0;
+const generateToastId = () => {
+  lastToastId += 1;
+  return lastToastId;
+};
 
 export default function App() {
   const [questions, setQuestions] = useState([]);
@@ -16,21 +23,32 @@ export default function App() {
   const [authTab, setAuthTab] = useState("login");
   const [showBinarySearch, setShowBinarySearch] = useState(false);
   const [showDivideAndConquer, setShowDivideAndConquer] = useState(false);
+  const [showGraphs, setShowGraphs] = useState(false);
   const [toasts, setToasts] = useState([]);
 
   // ---------------- TOAST SYSTEM ----------------
-  const showToast = (message, type = "success") => {
-    const id = Date.now();
+  const showToast = useCallback((message, type = "success") => {
+    const id = generateToastId();
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((toast) => toast.id !== id));
     }, 3500);
-  };
+  }, []);
+
+  // ---------------- LOGOUT ----------------
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem("token");
+    setToken(null);
+    setQuestions([]);
+    setShowBinarySearch(false);
+    setShowDivideAndConquer(false);
+    setShowGraphs(false);
+    showToast("Logged out successfully.", "info");
+  }, [showToast]);
 
   // ---------------- FETCH QUESTIONS ----------------
   useEffect(() => {
     if (!token) {
-      setQuestions([]);
       return;
     }
 
@@ -58,7 +76,7 @@ export default function App() {
         console.error("Fetch error:", err);
         setQuestions([]);
       });
-  }, [token]);
+  }, [token, handleLogout]);
 
   const total = questions.length;
   const solved = questions.filter((q) => q.isDone).length;
@@ -78,16 +96,6 @@ export default function App() {
 
   const hardQuestions = questions.filter((q) => q.difficulty === "hard");
   const solvedHard = hardQuestions.filter((q) => q.isDone).length;
-
-  // ---------------- LOGOUT ----------------
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-    setQuestions([]);
-    setShowBinarySearch(false);
-    setShowDivideAndConquer(false);
-    showToast("Logged out successfully.", "info");
-  };
 
   // ---------------- ADD QUESTION ----------------
   const handleAddQuestion = () => {
@@ -384,6 +392,31 @@ export default function App() {
     );
   }
 
+  // ---------------- RENDER GRAPHS PAGE ----------------
+  if (showGraphs) {
+    return (
+      <div className="dashboardPage">
+        <div className="bg-glow-container">
+          <div className="bg-glow-1"></div>
+          <div className="bg-glow-2"></div>
+        </div>
+
+        <header className="dashboardHeader">
+          <div className="logo" onClick={() => setShowGraphs(false)} style={{ cursor: "pointer" }}>
+            <span>🚀</span> DSA Tracker
+          </div>
+          <button onClick={() => setShowGraphs(false)} className="btnNav">
+            ← Back to Dashboard
+          </button>
+        </header>
+
+        <div className="glassCard" style={{ padding: "40px", textAlign: "left" }}>
+          <Graphs />
+        </div>
+      </div>
+    );
+  }
+
   // ---------------- RENDER DASHBOARD ----------------
   return (
     <div className="dashboardPage">
@@ -402,6 +435,7 @@ export default function App() {
             onClick={() => {
               setShowBinarySearch(true);
               setShowDivideAndConquer(false);
+              setShowGraphs(false);
             }}
             className="btnNav"
           >
@@ -411,10 +445,21 @@ export default function App() {
             onClick={() => {
               setShowDivideAndConquer(true);
               setShowBinarySearch(false);
+              setShowGraphs(false);
             }}
             className="btnNav"
           >
             🧩 Divide & Conquer
+          </button>
+          <button
+            onClick={() => {
+              setShowGraphs(true);
+              setShowBinarySearch(false);
+              setShowDivideAndConquer(false);
+            }}
+            className="btnNav"
+          >
+            📊 Graphs
           </button>
           <button onClick={handleLogout} className="btnLogout">
             Logout
@@ -498,6 +543,7 @@ export default function App() {
                 onClick={() => {
                   setShowBinarySearch(true);
                   setShowDivideAndConquer(false);
+                  setShowGraphs(false);
                 }}
               >
                 <span>📚 Binary Search</span>
@@ -508,9 +554,21 @@ export default function App() {
                 onClick={() => {
                   setShowDivideAndConquer(true);
                   setShowBinarySearch(false);
+                  setShowGraphs(false);
                 }}
               >
                 <span>🧩 Divide & Conquer</span>
+                <span className="badgeCount">Topic</span>
+              </button>
+              <button
+                className="quickNavBtn"
+                onClick={() => {
+                  setShowGraphs(true);
+                  setShowBinarySearch(false);
+                  setShowDivideAndConquer(false);
+                }}
+              >
+                <span>📊 Graphs</span>
                 <span className="badgeCount">Topic</span>
               </button>
             </div>
