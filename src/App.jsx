@@ -6,6 +6,7 @@ import Login from "./login.jsx";
 import BinarySearch from "./modules/binarySearch/binarySearch.jsx";
 import DivideAndConquer from "./modules/divideandconquer/dc.jsx";
 import Graphs from "./modules/graphs/graph.jsx";
+const API_URL = import.meta.env.VITE_API_URL;
 
 let lastToastId = 0;
 const generateToastId = () => {
@@ -52,7 +53,7 @@ export default function App() {
       return;
     }
 
-    fetch("http://localhost:3000/questions", {
+    fetch(`${API_URL}/questions`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -108,7 +109,7 @@ export default function App() {
       difficulty: newDifficulty || "easy",
     };
 
-    fetch("http://localhost:3000/questions", {
+    fetch(`${API_URL}/questions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -131,7 +132,7 @@ export default function App() {
 
   // ---------------- DELETE QUESTION ----------------
   const deleteQuestion = (id) => {
-    fetch(`http://localhost:3000/questions/${id}`, {
+    fetch(`${API_URL}/questions/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -152,7 +153,7 @@ export default function App() {
     const q = questions.find((q) => q._id === id);
     const newIsDone = !q.isDone;
 
-    fetch(`http://localhost:3000/questions/${id}`, {
+    fetch(`${API_URL}/questions/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -178,7 +179,7 @@ export default function App() {
 
   // ---------------- EDIT QUESTION ----------------
   const saveEditQuestion = (id, newText) => {
-    fetch(`http://localhost:3000/questions/${id}`, {
+    fetch(`${API_URL}/questions/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -201,7 +202,7 @@ export default function App() {
 
   // ---------------- EDIT NOTE ----------------
   const saveEditNote = (id, newNote) => {
-    fetch(`http://localhost:3000/questions/${id}`, {
+    fetch(`${API_URL}/questions/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -224,7 +225,7 @@ export default function App() {
 
   // ---------------- DELETE NOTE ----------------
   const deleteNote = (id) => {
-    fetch(`http://localhost:3000/questions/${id}`, {
+    fetch(`${API_URL}/questions/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
