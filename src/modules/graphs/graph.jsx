@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import introVideo from "../../assets/videos/graph-intro.mp4";
-import Zepto from "../../assets/videos/zepto.mp4";
+import Zepto from "../../assets/videos/ZEPTO.mp4";
 import weight from "../../assets/videos/weightgraph.mp4";
 import bfs from "../../assets/videos/bfs.mp4";
 import bfsi from "../../assets/videos/bfs.png";
@@ -1026,124 +1026,247 @@ export default function Graphs() {
               Now that we understand the complete idea, we can begin building the BFS algorithm step by step.
           </p>
       </div>
-            <h2>4. Build the solution</h2>
-            <Notebook
-                section={sections.find((s) => s.id === "b14")}
-                onAddCell={addNewCellAfter}
-                onMoveCell={moveCell}
-                onDeleteCell={deleteCell}
-                onRunCell={(sectionId, cellId) =>
-                runCell(sectionId, cellId, isPyodideLoading, !!getPyodide())
-                }
-                onEditCode={handleEditCode}
-            />
-            <Notebook
-                section={sections.find((s) => s.id === "b15")}
-                onAddCell={addNewCellAfter}
-                onMoveCell={moveCell}
-                onDeleteCell={deleteCell}
-                onRunCell={(sectionId, cellId) =>
-                runCell(sectionId, cellId, isPyodideLoading, !!getPyodide())
-                }
-                onEditCode={handleEditCode}
-            />
+                <h2>4. Build the solution</h2>
+                <Notebook
+                    section={sections.find((s) => s.id === "b14")}
+                    onAddCell={addNewCellAfter}
+                    onMoveCell={moveCell}
+                    onDeleteCell={deleteCell}
+                    onRunCell={(sectionId, cellId) =>
+                    runCell(sectionId, cellId, isPyodideLoading, !!getPyodide())
+                    }
+                    onEditCode={handleEditCode}
+                />
+                <Notebook
+                    section={sections.find((s) => s.id === "b15")}
+                    onAddCell={addNewCellAfter}
+                    onMoveCell={moveCell}
+                    onDeleteCell={deleteCell}
+                    onRunCell={(sectionId, cellId) =>
+                    runCell(sectionId, cellId, isPyodideLoading, !!getPyodide())
+                    }
+                    onEditCode={handleEditCode}
+                />
 
-         <div className="write4">
-            <h2>Step 5: Measure Performance</h2>
+            <div className="write4">
 
-            <p>
-                Now that we have built the BFS algorithm, let us analyze how efficient it is.
-            </p>
-
-            <div className="write3">
-                <h3>How Much Work Does BFS Do?</h3>
+                <h2>5: Measure Performance</h2>
 
                 <p>
-                    BFS visits each vertex only once. After a vertex is marked as visited,
-                    it is never added to the queue again.
+                Now that we have built the BFS algorithm, let us measure how efficient our actual implementation is.
                 </p>
 
                 <p>
-                    BFS also examines every edge while exploring neighboring vertices.
-                </p>
-
-                <p>
-                    Therefore, the total work done by BFS is:
+                This step is important because writing a correct algorithm is only half the job.
+                We also want to understand:
                 </p>
 
                 <ul>
-                    <li>Visit every vertex once.</li>
-                    <li>Explore every edge once.</li>
+                <li>How fast the algorithm runs</li>
+                <li>How much memory it uses</li>
                 </ul>
-            </div>
 
-            <div className="write3">
-                <h3>Time Complexity</h3>
+                </div>
+
+                <div className="write4">
+
+                <h2>Time Complexity</h2>
+
+                <div className="write3">
+
+                <h3>Where does the work happen?</h3>
 
                 <p>
-                    Let:
+                Our BFS implementation performs two major tasks:
                 </p>
 
                 <ul>
-                    <li><strong>V</strong> = Number of vertices</li>
-                    <li><strong>E</strong> = Number of edges</li>
+                <li>Visit vertices using the queue</li>
+                <li>Search neighbors using the adjacency matrix</li>
                 </ul>
 
                 <p>
-                    BFS processes all vertices and all edges during traversal.
+                Let us calculate each part separately.
+                </p>
+
+                </div>
+
+                <div className="write3">
+
+                <h3>Step 1: Visiting Vertices</h3>
+
+                <p>
+                Each vertex is marked visited only once.
+                </p>
+
+                <p>
+                Once a vertex enters the queue and gets processed, it never enters again.
+                </p>
+
+                <p>
+                So visiting vertices contributes:
+                </p>
+
+                <p>
+                O(V)
+                </p>
+
+                <p>
+                where V = number of vertices.
+                </p>
+
+                </div>
+
+                <div className="write3">
+
+                <h3>Step 2: Exploring Neighbors</h3>
+
+                <p>
+                This implementation stores the graph using an <b>Adjacency Matrix</b>.
+                </p>
+
+                <p>
+                To find neighbors of a vertex <code>u</code>, we execute:
                 </p>
 
                 <pre>
                     <code>
-                    {`Time Complexity = O(V + E)`}
+                {`for v in range(n):`}
                     </code>
                 </pre>
 
                 <p>
-                    This makes BFS very efficient for exploring graphs.
+                Notice something important.
                 </p>
-            </div>
-
-            <div className="write3">
-                <h3>Space Complexity</h3>
 
                 <p>
-                    BFS uses additional memory for:
+                Even if vertex <code>u</code> has only one actual connection,
+                we still check all columns of that row.
+                </p>
+
+                <p>
+                That means:
                 </p>
 
                 <ul>
-                    <li>The queue</li>
-                    <li>The visited array</li>
-                    <li>The traversal result</li>
+                <li>For vertex 0 → scan all n columns</li>
+                <li>For vertex 1 → scan all n columns</li>
+                <li>For vertex 2 → scan all n columns</li>
+                <li>… continue for all vertices</li>
                 </ul>
 
                 <p>
-                    In the worst case, all vertices may need to be stored.
+                Total work:
                 </p>
-
-                <pre>
-                    <code>
-        {`Space Complexity = O(V)`}
-                    </code>
-                </pre>
-            </div>
-
-            <div className="write2">
-                <h3>Key Takeaway</h3>
 
                 <p>
-                    BFS visits every vertex exactly once and explores every edge exactly once.
-                    Therefore:
+                n × n = O(V²)
                 </p>
 
-                <pre>
-                    <code>
-        {`Time Complexity  = O(V + E)
-        Space Complexity = O(V)`}
-                    </code>
-                </pre>
+                </div>
+
+                <div className="write3">
+
+                <h3>Final Time Complexity</h3>
+
+                <p>
+                The total work becomes:
+                </p>
+
+                <p>
+                O(V) + O(V²)
+                </p>
+
+                <p>
+                The larger term dominates.
+                </p>
+
+                <p>
+                Therefore:
+                </p>
+
+                <p>
+                <b>Time Complexity = O(V²)</b>
+                </p>
+
+                <p>
+                This result comes specifically because we used an adjacency matrix.
+                </p>
+
+                </div>
+
+                </div>
+
+                <div className="write4">
+
+                <h2>Space Complexity</h2>
+
+                <div className="write3">
+
+                <h3>What extra memory are we using?</h3>
+
+                <p>
+                BFS creates additional structures while running:
+                </p>
+
+                <ul>
+                <li>Queue → stores discovered vertices</li>
+                <li>Visited array (s[]) → tracks visited vertices</li>
+                <li>Traversal array → stores BFS order</li>
+                <li>Traversal edges (t[]) → stores discovered connections</li>
+                </ul>
+
+                <p>
+                In the worst case, each structure may store up to V vertices.
+                </p>
+
+                <p>
+                Total extra memory:
+                </p>
+
+                <p>
+                O(V)
+                </p>
+
+                </div>
+
+                <div className="write3">
+
+                <h3>What about the adjacency matrix?</h3>
+
+                <p>
+                The graph itself is stored as:
+                </p>
+
+                <p>
+                n × n
+                </p>
+
+                <p>
+                which requires:
+                </p>
+
+                <p>
+                O(V²)
+                </p>
+
+                <p>
+                However, this storage belongs to the input representation and is not created by BFS.
+                </p>
+
+                <p>
+                When measuring algorithm space separately, we count:
+                </p>
+
+                <p>
+                <b>Auxiliary Space = O(V)</b>
+                </p>
+
+             </div>
+
             </div>
-        </div>
+
+            
 
         <div className="write4">
             <h2>Step 6: Improve and Generalize</h2>

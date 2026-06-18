@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState, useEffect, useCallback } from "react";
-import Question from "./Question.jsx";
+import Question from "./question.jsx";
 import Signup from "./signup.jsx";
 import Login from "./login.jsx";
 import BinarySearch from "./modules/binarySearch/binarySearch.jsx";
@@ -26,6 +26,9 @@ export default function App() {
   const [showDivideAndConquer, setShowDivideAndConquer] = useState(false);
   const [showGraphs, setShowGraphs] = useState(false);
   const [toasts, setToasts] = useState([]);
+  const [donationAmount, setDonationAmount] = useState(100);
+  const [showReceipt, setShowReceipt] = useState(false);
+  const [receiptDetails, setReceiptDetails] = useState(null);
 
   // ---------------- TOAST SYSTEM ----------------
   const showToast = useCallback((message, type = "success") => {
@@ -36,6 +39,92 @@ export default function App() {
     }, 3500);
   }, []);
 
+
+      const handlePayment = async () => {
+        if (donationAmount < 1) {
+          showToast("Please enter a donation amount of at least ₹1", "error");
+          return;
+        }
+        try {
+          // 1. Create order from backend
+          const res = await fetch(`${API_URL}/api/payment/create-order`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ amount: donationAmount }),
+          });
+
+          const data = await res.json();
+
+          if (!data.success) {
+            throw new Error(data.message || "Order creation failed");
+          }
+
+          const order = data.order;
+
+          // 2. Razorpay options
+          const options = {
+            key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+            amount: order.amount,
+            currency: order.currency,
+            name: "DSA Tracker Support",
+            description: "Support our project with a donation",
+            order_id: order.id,
+
+            handler: async function (response) {
+              try {
+                // 3. VERIFY PAYMENT (IMPORTANT STEP)
+                const verifyRes = await fetch(
+                  `${API_URL}/api/payment/verify`,
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      razorpay_order_id: response.razorpay_order_id,
+                      razorpay_payment_id: response.razorpay_payment_id,
+                      razorpay_signature: response.razorpay_signature,
+                    }),
+                  }
+                );
+
+                const verifyData = await verifyRes.json();
+
+                if (verifyData.success) {
+                  showToast(verifyData.message || "Payment Verified Successfully ✅", "success");
+                  console.log("Verified Payment:", verifyData);
+                  setReceiptDetails({
+                    paymentId: response.razorpay_payment_id,
+                    orderId: response.razorpay_order_id,
+                    amount: donationAmount,
+                    date: new Date().toLocaleString(),
+                  });
+                  setShowReceipt(true);
+                } else {
+                  showToast("Payment verification failed ❌", "error");
+                }
+              } catch (err) {
+                console.error("Verification error:", err);
+                showToast("Payment verification error", "error");
+              }
+            },
+
+            theme: {
+              color: "#8b5cf6",
+            },
+          };
+
+          // 4. Open Razorpay popup
+          const rzp = new window.Razorpay(options);
+          rzp.open();
+        } catch (err) {
+          console.error("Payment init error:", err);
+          showToast("Payment failed to start", "error");
+        }
+      };
+
   // ---------------- LOGOUT ----------------
   const handleLogout = useCallback(() => {
     localStorage.removeItem("token");
@@ -44,6 +133,8 @@ export default function App() {
     setShowBinarySearch(false);
     setShowDivideAndConquer(false);
     setShowGraphs(false);
+    setShowReceipt(false);
+    setReceiptDetails(null);
     showToast("Logged out successfully.", "info");
   }, [showToast]);
 
@@ -534,6 +625,26 @@ export default function App() {
               </div>
             </div>
           </div>
+          <div className="glassCard donateCard">
+            <h3>Support Us 💖</h3>
+            <p className="donateText">
+              If you find this tracker helpful, consider supporting us with a donation!
+            </p>
+            <div className="donateInputGroup">
+              <span className="currencySymbol">₹</span>
+              <input
+                type="number"
+                min="1"
+                value={donationAmount}
+                onChange={(e) => setDonationAmount(Math.max(1, parseInt(e.target.value) || 0))}
+                className="donateInput"
+                placeholder="Amount"
+              />
+              <button onClick={handlePayment} className="btnDonate">
+                Donate
+              </button>
+            </div>
+          </div>
 
           {/* Quick topic navigation */}
           <div className="glassCard quickNavCard">
@@ -668,6 +779,56 @@ export default function App() {
         </div>
 
       </div>
+
+      {/* Receipt Modal Overlay */}
+      {showReceipt && receiptDetails && (
+        <div className="receiptModalOverlay">
+          <div className="receiptModalCard glassCard animate-receipt">
+            <div className="receiptHeader">
+              <div className="receiptHeart">💖</div>
+              <h2>Donation Confirmed!</h2>
+              <p>Thank you for supporting DSA Tracker</p>
+            </div>
+            
+            <div className="receiptDivider"></div>
+            
+            <div className="receiptDetailsTable">
+              <div className="receiptRow">
+                <span className="receiptLabel">Status</span>
+                <span className="receiptValue successText">Paid Success ✅</span>
+              </div>
+              <div className="receiptRow">
+                <span className="receiptLabel">Payment ID</span>
+                <span className="receiptValue">{receiptDetails.paymentId}</span>
+              </div>
+              <div className="receiptRow">
+                <span className="receiptLabel">Order ID</span>
+                <span className="receiptValue">{receiptDetails.orderId}</span>
+              </div>
+              <div className="receiptRow">
+                <span className="receiptLabel">Amount</span>
+                <span className="receiptValue font-mono">₹{receiptDetails.amount}.00</span>
+              </div>
+              <div className="receiptRow">
+                <span className="receiptLabel">Date & Time</span>
+                <span className="receiptValue">{receiptDetails.date}</span>
+              </div>
+            </div>
+
+            <div className="receiptFooter">
+              <button onClick={() => window.print()} className="btnPrint">
+                🖨️ Print / Save PDF
+              </button>
+              <button onClick={() => {
+                setShowReceipt(false);
+                setReceiptDetails(null);
+              }} className="btnCloseReceipt">
+                Close Window
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Floating Toasts container */}
       <div className="toast-container">

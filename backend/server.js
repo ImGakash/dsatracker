@@ -6,6 +6,10 @@ const cors = require("cors");
 
 const connectDB = require("./config/db");
 
+const paymentRoutes = require("./routes/payment.routes");
+
+
+
 // Connect DB first
 connectDB();
 
@@ -27,7 +31,7 @@ app.use("/questions", questionRoutes);
 app.get("/", (req, res) => {
   res.send("Backend is working 🚀");
 });
-
+app.use("/api/payment", paymentRoutes);
 // Start server
 const PORT = process.env.PORT || 3000;
 

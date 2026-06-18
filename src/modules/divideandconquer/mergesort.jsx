@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import "./MergeSort.css";
+import "./Mergesort.css";
 
 function generateMergeSteps(arr) {
   const steps = [];
