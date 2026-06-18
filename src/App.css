@@ -1235,3 +1235,301 @@
   25% { transform: translateX(-4px); }
   75% { transform: translateX(4px); }
 }
+
+/* Donation Widget Styling */
+.donateCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 24px !important;
+  border-radius: 20px;
+  text-align: left;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.donateCard h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.donateText {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.donateInputGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.currencySymbol {
+  position: absolute;
+  left: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.donateInput {
+  width: 100%;
+  padding: 10px 12px 10px 24px !important;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.25) !important;
+  color: var(--text-primary) !important;
+  border-radius: 10px !important;
+  font-size: 14px !important;
+  font-family: var(--sans) !important;
+  transition: all 0.2s ease !important;
+  box-sizing: border-box;
+}
+
+.donateInput:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--accent-glow) !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Hide number input spinners */
+.donateInput::-webkit-outer-spin-button,
+.donateInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.btnDonate {
+  background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%) !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border-radius: 10px !important;
+  cursor: pointer !important;
+  font-family: var(--sans) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2) !important;
+}
+
+.btnDonate:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.35) !important;
+  background: linear-gradient(135deg, var(--accent-hover) 0%, var(--accent) 100%) !important;
+}
+
+.btnDonate:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Receipt Modal Overlay */
+.receiptModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(11, 15, 25, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Receipt Modal Card */
+.receiptModalCard {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(17, 24, 39, 0.95) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 24px !important;
+  padding: 36px !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 25px rgba(139, 92, 246, 0.15) !important;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.animate-receipt {
+  animation: receipt-zoom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes receipt-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.receiptHeart {
+  font-size: 40px;
+  margin-bottom: 12px;
+  animation: pulse-heart 1.5s infinite alternate;
+}
+
+@keyframes pulse-heart {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.15); }
+}
+
+.receiptHeader h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.receiptHeader p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.receiptDivider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border) 50%, transparent 100%);
+  margin: 24px 0;
+}
+
+.receiptDetailsTable {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  text-align: left;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  margin-bottom: 28px;
+}
+
+.receiptRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+
+.receiptLabel {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.receiptValue {
+  color: var(--text-primary);
+  font-weight: 600;
+  word-break: break-all;
+  margin-left: 10px;
+  text-align: right;
+}
+
+.successText {
+  color: var(--success);
+}
+
+.font-mono {
+  font-family: var(--mono);
+}
+
+.receiptFooter {
+  display: flex;
+  gap: 12px;
+}
+
+.btnPrint {
+  flex: 1.3;
+  background: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%) !important;
+  color: white !important;
+  border: none !important;
+  padding: 12px 20px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  font-family: var(--sans) !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2) !important;
+}
+
+.btnPrint:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.35) !important;
+}
+
+.btnCloseReceipt {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid var(--border) !important;
+  padding: 12px 20px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  border-radius: 12px !important;
+  cursor: pointer !important;
+  font-family: var(--sans) !important;
+  transition: all 0.2s ease !important;
+}
+
+.btnCloseReceipt:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Print CSS Media Queries */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .receiptModalOverlay, .receiptModalOverlay * {
+    visibility: visible;
+  }
+  .receiptModalOverlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: white !important;
+    color: black !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+  }
+  .receiptModalCard {
+    border: none !important;
+    box-shadow: none !important;
+    background: white !important;
+    color: black !important;
+    margin: 40px auto !important;
+    width: 100% !important;
+    max-width: 500px !important;
+    padding: 0 !important;
+  }
+  .receiptHeader h2, .receiptHeader p, .receiptValue, .receiptLabel {
+    color: black !important;
+  }
+  .successText {
+    color: #059669 !important; /* Emerald success for print */
+  }
+  .receiptDetailsTable {
+    background: #f3f4f6 !important;
+    border: 1px solid #e5e7eb !important;
+  }
+  .receiptFooter {
+    display: none !important;
+  }
+}
