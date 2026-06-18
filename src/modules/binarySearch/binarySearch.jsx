@@ -131,7 +131,7 @@ export default function BinarySearch() {
         <h2>Analyzing the Problem with Our Method</h2>
         
         <div className="write4">
-            <h3>1. Understand the Goal</h3>
+            <h3>1. Understand the Goal,define problem input and output clearly</h3>
 
             <p>
               Before writing any code, let's make sure we clearly understand the problem.
@@ -1328,7 +1328,7 @@ export default function BinarySearch() {
       </div>
 
       <div className="write4">
-        <h2>6.  Measure Performance.</h2>
+        
         <p>
           Once again, let's try to count the number of iterations in the algorithm. If we start out with an array of N elements, then each time the size of the array reduces to half for the next iteration, until we are left with just 1 element.
         </p>

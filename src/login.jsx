@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 
-import.meta.env.VITE_GOOGLE_CLIENT_ID
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function Login({ onLoginSuccess, onSwitchToSignup }) {
   const [email, setEmail] = useState("");
@@ -22,7 +22,7 @@ export default function Login({ onLoginSuccess, onSwitchToSignup }) {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:3000/auth/login", {
+      const res = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export default function Login({ onLoginSuccess, onSwitchToSignup }) {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:3000/auth/google", {
+      const res = await fetch(`${API_URL}/auth/google`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

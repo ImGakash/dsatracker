@@ -201,7 +201,7 @@ export default function DivideAndConquer() {
             <h2>Analyzing the Problem with Our Method</h2>
             
             <div className="write4">
-                <h2>1. Understand the Problem Clearly</h2>
+                <h2>1. Understand the Goal, define problem input and output clearly</h2>
 
                 <p>
                   Before thinking about how to solve the problem, we first need to clearly
@@ -279,7 +279,7 @@ export default function DivideAndConquer() {
        </div>
 
         <div className="write4">
-          <h2>2. Explore Test Cases</h2>
+          <h2>2. Explore examples, Test Cases and edge cases</h2>
 
           <p>
             Before we write any code, let’s think about different kinds of inputs our
@@ -437,7 +437,7 @@ export default function DivideAndConquer() {
     />
 
    <div className="write4">
-      <h2>3. Come up with a correct solution. State it in plain English.</h2>
+      <h2>3. Discover a Baseline Approach,define the approch in plain english.</h2>
 
       <p>
         Now that we understand the problem and have thought about different test cases,
@@ -583,7 +583,7 @@ export default function DivideAndConquer() {
  
 
     <div className="write4">
-      <h2>5. Analyze the algorithm's complexity and identify inefficiencies, if any.</h2>
+      <h2>5.Measure Performance.</h2>
 
       <p>
         Now that our Bubble Sort solution is working correctly, let’s understand how efficient it is.
@@ -1536,7 +1536,7 @@ export default function DivideAndConquer() {
 
         </div>
         <div className="write4">
-            <h2>Step 7 — Identify Inefficiencies</h2>
+            <h2>Identify Inefficiencies</h2>
 
        
         <p>
