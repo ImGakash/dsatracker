@@ -68,7 +68,7 @@ export default function App() {
             key: import.meta.env.VITE_RAZORPAY_KEY_ID,
             amount: order.amount,
             currency: order.currency,
-            name: "DSA Tracker Support",
+            name: "DSA Support",
             description: "Support our project with a donation",
             order_id: order.id,
 
@@ -364,10 +364,10 @@ export default function App() {
 
         <header className="landingHeader">
           <div className="logo">
-            <span>🚀</span> DSA Tracker
+            <span>🚀</span> DSA
           </div>
           <p className="landingTagline">
-            Organize, structure, and master your Data Structures & Algorithms preparation.
+            Organize, structure, and master your Data Structures & Algorithms preparation on our DSA learning platform.
           </p>
         </header>
 
@@ -445,7 +445,7 @@ export default function App() {
 
         <header className="dashboardHeader">
           <div className="logo" onClick={() => setShowBinarySearch(false)} style={{ cursor: "pointer" }}>
-            <span>🚀</span> DSA Tracker
+            <span>🚀</span> DSA
           </div>
           <button onClick={() => setShowBinarySearch(false)} className="btnNav">
             ← Back to Dashboard
@@ -470,7 +470,7 @@ export default function App() {
 
         <header className="dashboardHeader">
           <div className="logo" onClick={() => setShowDivideAndConquer(false)} style={{ cursor: "pointer" }}>
-            <span>🚀</span> DSA Tracker
+            <span>🚀</span> DSA
           </div>
           <button onClick={() => setShowDivideAndConquer(false)} className="btnNav">
             ← Back to Dashboard
@@ -495,7 +495,7 @@ export default function App() {
 
         <header className="dashboardHeader">
           <div className="logo" onClick={() => setShowGraphs(false)} style={{ cursor: "pointer" }}>
-            <span>🚀</span> DSA Tracker
+            <span>🚀</span> DSA
           </div>
           <button onClick={() => setShowGraphs(false)} className="btnNav">
             ← Back to Dashboard
@@ -519,7 +519,7 @@ export default function App() {
 
       <header className="dashboardHeader">
         <div className="logo">
-          <span>🚀</span> DSA Tracker
+          <span>🚀</span> DSA
         </div>
         
         <div className="navButtonGroup">
@@ -628,7 +628,7 @@ export default function App() {
           <div className="glassCard donateCard">
             <h3>Support Us 💖</h3>
             <p className="donateText">
-              If you find this tracker helpful, consider supporting us with a donation!
+              If you find this platform helpful, consider supporting us with a donation!
             </p>
             <div className="donateInputGroup">
               <span className="currencySymbol">₹</span>
@@ -787,7 +787,7 @@ export default function App() {
             <div className="receiptHeader">
               <div className="receiptHeart">💖</div>
               <h2>Donation Confirmed!</h2>
-              <p>Thank you for supporting DSA Tracker</p>
+              <p>Thank you for supporting DSA</p>
             </div>
             
             <div className="receiptDivider"></div>

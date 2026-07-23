@@ -64,7 +64,7 @@ export default function Signup({ onSignupSuccess, onSwitchToLogin }) {
   return (
     <div className="authCard">
       <h2>Create Account</h2>
-      <p className="authSubtitle">Join and start tracking your DSA journey</p>
+      <p className="authSubtitle">Join and start your journey on the DSA learning platform</p>
 
       {error && <div className="authError">{error}</div>}
       {successMsg && <div className="authSuccess">{successMsg}</div>}

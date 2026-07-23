@@ -99,7 +99,7 @@ export default function Login({ onLoginSuccess, onSwitchToSignup }) {
   return (
     <div className="authCard">
       <h2>Welcome Back</h2>
-      <p className="authSubtitle">Login to track your DSA progress</p>
+      <p className="authSubtitle">Login to access your DSA learning platform</p>
 
       {error && <div className="authError">{error}</div>}
 
